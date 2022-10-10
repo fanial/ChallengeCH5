@@ -11,7 +11,7 @@ import retrofit2.Response
 class HomeViewModel : ViewModel() {
 
     var allData : MutableLiveData<List<ResponseDataTaskItem>?>
-    var updateData : MutableLiveData<List<ResponseDataTaskItem>?>
+    var updateData : MutableLiveData<ResponseDataTaskItem?>
     var deleteData : MutableLiveData<String?>
 
     init {
@@ -24,7 +24,7 @@ class HomeViewModel : ViewModel() {
         return allData
     }
 
-    fun updateLiveData() : MutableLiveData<List<ResponseDataTaskItem>?>{
+    fun updateLiveData() : MutableLiveData<ResponseDataTaskItem?>{
         return updateData
     }
 
@@ -54,12 +54,12 @@ class HomeViewModel : ViewModel() {
             })
     }
 
-    fun callUpdateData(userId : String, idTask : String, category : String, content : String, image : String, title : String){
+    fun callUpdateData(category : String, content : String, idTask : String, image : String, title : String, userId : String){
         ApiClient.instance.putData(userId, idTask, ResponseDataTaskItem(category, content, idTask, image, title, userId))
-            .enqueue(object : Callback<List<ResponseDataTaskItem>>{
+            .enqueue(object : Callback<ResponseDataTaskItem>{
                 override fun onResponse(
-                    call: Call<List<ResponseDataTaskItem>>,
-                    response: Response<List<ResponseDataTaskItem>>,
+                    call: Call<ResponseDataTaskItem>,
+                    response: Response<ResponseDataTaskItem>,
                 ) {
                     if (response.isSuccessful){
                         updateData.postValue(response.body())
@@ -68,7 +68,7 @@ class HomeViewModel : ViewModel() {
                     }
                 }
 
-                override fun onFailure(call: Call<List<ResponseDataTaskItem>>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseDataTaskItem>, t: Throwable) {
                     updateData.postValue(null)
                 }
 

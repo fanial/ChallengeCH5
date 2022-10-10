@@ -82,9 +82,9 @@ class HomeFragment : Fragment() {
                         if (response.isSuccessful){
                             binding.rvTask.adapter = ListAdapter(response.body()!!)
                             binding.rvTask.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                            Toast.makeText(context, "Load Data Success", Toast.LENGTH_LONG).show()
+                            Log.d("Response API", "LOAD DATA SUCCESS")
                         }else{
-                            Toast.makeText(context, "Load Data Failed", Toast.LENGTH_LONG).show()
+                            Log.d("Response API", "LOAD DATA FAILED")
                         }
                     }
 
@@ -102,10 +102,4 @@ class HomeFragment : Fragment() {
         //Retrofit
         showList(userId)
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
 }

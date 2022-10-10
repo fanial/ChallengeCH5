@@ -3,6 +3,7 @@
     <style name="Base.Theme.ChallengeCH5" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/pewter</item>
+        <item name="colorOnSecondary">@color/sand</item>
     </style>
 
     <style name="Theme.ChallengeCH5" parent="Base.Theme.ChallengeCH5" />

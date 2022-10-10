@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -41,24 +42,33 @@ class UpdateFragment : Fragment() {
         share = requireActivity().getSharedPreferences("account", Context.MODE_PRIVATE)
         val name = share.getString("username","username")
         Log.d("Homescreen", "Username : $name")
-        val userId = share.getString("id", "0")
 
         binding.btnUpdate.setOnClickListener {
             requireActivity().run {
                 //get data
+                /**
                 val getId = arguments?.getString("idTask", "0")
                 val getUser = arguments?.getString("userId", "0")
                 val getTitle = arguments?.getString("title","title")
                 val getCategory = arguments?.getString("category","category")
                 val getContent = arguments?.getString("content", "content")
                 val getImage = arguments?.getString("image","image")
+                **/
+                val getUpdate = arguments?.getSerializable("update") as ResponseDataTaskItem
                 //set Data
-                binding.vTitle.setText(getTitle)
-                binding.vCategory.setText(getCategory)
-                binding.vContent.setText(getContent)
-                binding.vImage.setText(getImage)
+                binding.vCategory.setText(getUpdate.category)
+                binding.vContent.setText(getUpdate.content)
+                binding.vImage.setText(getUpdate.image)
+                binding.vTitle.setText(getUpdate.title)
 
-                updateData(getCategory!!, getContent!!, getId!!, getImage!!, getTitle!!, getUser!!,)
+                val getUser = getUpdate.userId
+                val getId = getUpdate.idTask
+                val getCategory = getUpdate.category
+                val getContent = getUpdate.content
+                val getImage = getUpdate.image
+                val getTitle = getUpdate.title
+
+                updateData(getUser, getId, getCategory, getContent, getImage, getTitle)
                 findNavController().navigate(R.id.action_updateFragment_to_homeFragment)
                 Log.d("UPDATE STATUS", "Update Success")
             }
@@ -75,7 +85,7 @@ class UpdateFragment : Fragment() {
         image: String,
     ) {
         val viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        viewModel.callUpdateData(category, content, idTask,  image, title, id )
+        viewModel.callUpdateData(title, category, idTask, content, image, id )
         viewModel.updateLiveData().observe(viewLifecycleOwner, Observer {
             if (it != null){
                 Toast.makeText(context, "Update Data Success", Toast.LENGTH_SHORT).show()
@@ -83,6 +93,23 @@ class UpdateFragment : Fragment() {
                 Log.d("UPDATE RETROFIT","Data Null")
             }
         })
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback = object :
+            OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                this.remove()
+                activity?.onBackPressed()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

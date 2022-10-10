@@ -13,22 +13,39 @@ interface ApiService {
 
     ) : Call<List<ResponseDataTaskItem>>
 
-    @PUT("user/{id}/task/{id}")
+    @GET("user/{id}/task/{idTask}")
+    fun getTaskId(
+        @Path("id") userId: String,
+        @Path("idTask") idTask: String
+    ) : Call<ResponseDataTaskItem>
+
+    @PUT("user/{id}/task/{idTask}")
     fun putData(
         @Path("id") userId: String,
-        @Path("id") idTask : String,
+        @Path("idTask") idTask : String,
         @Body request : ResponseDataTaskItem
-    ) : Call<List<ResponseDataTaskItem>>
+    ) : Call<ResponseDataTaskItem>
 
-    @DELETE("user/{id}/task/{id}")
+    @DELETE("user/{id}/task/{idTask}")
     fun delData(
         @Path("id") userId : String,
-        @Path("id") idTask : String
+        @Path("idTask") idTask : String
     ) : Call<String>
 
     //User
     @GET("user")
     fun getUser() : Call<List<ResponseDataUserItem>>
+
+    @GET("user/{id}")
+    fun getUserId(
+        @Path("id") userId: String
+    ) : Call<ResponseDataUserItem>
+
+    @PUT("user/{id}")
+    fun putUser(
+        @Path("id") userId: String,
+        @Body request: ResponseDataUserItem
+    ) : Call<ResponseDataUserItem>
 
     @POST("user")
     fun postUser(@Body user : ResponseDataUserItem) : Call<ResponseDataUserItem>

@@ -61,14 +61,17 @@ class DetailFragment : Fragment() {
 
         binding.btnUpdate.setOnClickListener {
             val data = Bundle()
+            /**
             data.putString("idTask", idTask)
             data.putString("userId", userid)
             data.putString("category", category)
             data.putString("content", content)
             data.putString("title", title)
             data.putString("image", image)
+            **/
+            data.putSerializable("update", getData)
             findNavController().navigate(R.id.action_detailFragment_to_updateFragment, data)
-            Log.d("DATA UPDATE", "data bundle : ${data}")
+            Log.d("DATA UPDATE", "${data}")
         }
 
         binding.btnDelete.setOnClickListener {
@@ -82,24 +85,20 @@ class DetailFragment : Fragment() {
                 }
                 .setPositiveButton(resources.getString(R.string.delete)) { dialog, which ->
                     // Respond to positive button press
-                    deleteTask(idTask, userid)
+                    val model = ViewModelProvider(this).get(HomeViewModel::class.java)
+                    model.callDeleteData(userid, idTask)
+                    model.deleteLiveData().observe(viewLifecycleOwner, Observer {
+                        if (it != null){
+                            Log.d("deleteFilm", it.toString())
+                            Toast.makeText(context, "Delete Data Success", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+
                     Log.i("DELETE TASK", "${getData}")
                     findNavController().navigate(R.id.action_detailFragment_to_homeFragment)
                 }
                 .show()
         }
-
-    }
-
-    private fun deleteTask(data: String, getUser : String) {
-        val model = ViewModelProvider(this).get(HomeViewModel::class.java)
-        model.callDeleteData(getUser, data)
-        model.deleteLiveData().observe(viewLifecycleOwner, Observer {
-            if (it != null){
-                Toast.makeText(context, "Delete Data Success", Toast.LENGTH_SHORT).show()
-                Log.d("deleteFilm", it.toString())
-            }
-        })
 
     }
 

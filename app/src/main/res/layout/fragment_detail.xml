@@ -10,11 +10,12 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottom"
         android:background="@color/cream">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp">
 
             <RelativeLayout
@@ -42,12 +43,23 @@
                     android:layout_height="match_parent"
                     android:layout_below="@id/vImage"
                     android:hint="@string/welcome" />
+
+                <TextView
+                    android:id="@+id/vCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vContent"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center_horizontal"
+                    android:hint="Category" />
+
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
     </androidx.core.widget.NestedScrollView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
@@ -70,13 +82,6 @@
                 android:backgroundTint="@color/salmon"
                 android:layout_margin="5dp"
                 android:text="Delete"/>
-
-            <TextView
-                android:id="@+id/vCategory"
-                android:layout_marginStart="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Category"/>
 
         </com.google.android.material.bottomappbar.BottomAppBar>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

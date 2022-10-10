@@ -27,4 +27,7 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="new_password">New Password</string>
+    <string name="update_success">Update Success</string>
+    <string name="lgout">Logout</string>
 </resources>
