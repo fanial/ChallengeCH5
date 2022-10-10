@@ -51,8 +51,8 @@
             android:id="@+id/action_detailFragment_to_updateFragment"
             app:destination="@id/updateFragment" />
         <action
-            android:id="@+id/action_detailFragment_to_decisionFragment"
-            app:destination="@id/decisionFragment" />
+            android:id="@+id/action_detailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/registFragment"
@@ -67,11 +67,7 @@
         android:id="@+id/profileFragment"
         android:name="com.fal.challengech5.fragment.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profileFragment_to_decisionFragment"
-            app:destination="@id/decisionFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/updateFragment"
         android:name="com.fal.challengech5.fragment.UpdateFragment"
@@ -81,9 +77,4 @@
             android:id="@+id/action_updateFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/decisionFragment"
-        android:name="com.fal.challengech5.fragment.DecisionFragment"
-        android:label="fragment_decision"
-        tools:layout="@layout/fragment_decision" />
 </navigation>

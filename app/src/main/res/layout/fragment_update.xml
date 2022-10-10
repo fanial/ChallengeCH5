@@ -87,7 +87,7 @@
                 android:backgroundTint="@color/salmon"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="5dp"
-                android:text="Close"/>
+                android:text="@string/cancel"/>
 
 
         </com.google.android.material.bottomappbar.BottomAppBar>

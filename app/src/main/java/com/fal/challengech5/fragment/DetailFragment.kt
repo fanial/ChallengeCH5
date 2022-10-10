@@ -8,12 +8,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.fal.challengech5.R
 import com.fal.challengech5.databinding.FragmentDetailBinding
 import com.fal.challengech5.model.ResponseDataTaskItem
+import com.fal.challengech5.viewModel.HomeViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DetailFragment : Fragment() {
 
@@ -67,11 +72,34 @@ class DetailFragment : Fragment() {
         }
 
         binding.btnDelete.setOnClickListener {
-            val data = Bundle()
-            data.putString("idTask", idTask)
-            data.putString("userId", userid)
-            findNavController().navigate(R.id.action_detailFragment_to_decisionFragment, data)
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(resources.getString(R.string.delete))
+                .setMessage(resources.getString(R.string.are_you_sure))
+                .setCancelable(false)
+                .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
+                    // Respond to negative button press
+                    dialog.cancel()
+                }
+                .setPositiveButton(resources.getString(R.string.delete)) { dialog, which ->
+                    // Respond to positive button press
+                    deleteTask(idTask, userid)
+                    Log.i("DELETE TASK", "${getData}")
+                    findNavController().navigate(R.id.action_detailFragment_to_homeFragment)
+                }
+                .show()
         }
+
+    }
+
+    private fun deleteTask(data: String, getUser : String) {
+        val model = ViewModelProvider(this).get(HomeViewModel::class.java)
+        model.callDeleteData(getUser, data)
+        model.deleteLiveData().observe(viewLifecycleOwner, Observer {
+            if (it != null){
+                Toast.makeText(context, "Delete Data Success", Toast.LENGTH_SHORT).show()
+                Log.d("deleteFilm", it.toString())
+            }
+        })
 
     }
 

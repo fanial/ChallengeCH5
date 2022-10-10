@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.fal.challengech5.R
 import com.fal.challengech5.databinding.FragmentDecisionBinding
 import com.fal.challengech5.viewModel.HomeViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DecisionFragment : Fragment() {
 
@@ -33,23 +34,7 @@ class DecisionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnYes.setOnClickListener {
-            var getData = arguments?.getString("idTask")
-            val getUser = arguments?.getString("userId")
-            deleteTask(getData!!, getUser!!)
-            Log.i("DELETE TASK", "Task ID = ${getData}, UserID = ${getUser}")
         }
-    }
-
-    private fun deleteTask(data: String, getUser : String) {
-        val model = ViewModelProvider(this).get(HomeViewModel::class.java)
-        model.callDeleteData(getUser, data)
-        model.deleteLiveData().observe(viewLifecycleOwner, Observer {
-            if (it != null){
-                Toast.makeText(context, "Delete Data Success", Toast.LENGTH_SHORT).show()
-                Log.d("deleteFilm", it.toString())
-            }
-        })
-
     }
 
 }
