@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ProfileFragment">
 
     <androidx.cardview.widget.CardView
@@ -23,32 +24,52 @@
                 android:textSize="24sp"
                 android:layout_marginBottom="@dimen/fragment_horizontal_margin"/>
 
-            <EditText
-                android:id="@+id/vUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_below="@id/tv"
-                android:hint="@string/username"
-                android:minHeight="48dp"
-                android:inputType="text" />
-
-            <EditText
-                android:id="@+id/vEmail"
+                android:id="@+id/inputLayoutUsername"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/vUsername"
-                android:hint="@string/prompt_email"
-                android:minHeight="48dp"
-                android:inputType="textEmailAddress" />
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/vPassword"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/vUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/username"
+                    android:inputType="text"
+                    android:minHeight="48dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutEmail"
+                android:layout_below="@id/inputLayoutUsername"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/vEmail"
-                android:hint="@string/prompt_password"
-                android:minHeight="48dp"
-                android:inputType="textPassword" />
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/vEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_email"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutPass"
+                app:endIconMode="password_toggle"
+                app:errorEnabled="true"
+                android:layout_below="@id/inputLayoutEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/vPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_password"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

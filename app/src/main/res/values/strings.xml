@@ -7,13 +7,13 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email" translatable="false">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Sign in or Register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_password">Password Invalid</string>
     <string name="login_failed">"Login failed"</string>
     <string name="label_regist">Don\'t have account? Register here</string>
     <string name="splash_image">splash image</string>
@@ -27,7 +27,14 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
-    <string name="new_password">New Password</string>
     <string name="update_success">Update Success</string>
     <string name="lgout">Logout</string>
+    <string name="delete_success">Delete Success</string>
+    <string name="something_wrong">Something Wrong</string>
+    <string name="login_success">Login Success</string>
+    <string name="failed_load_data">Failed to Load Data</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="regist_success">Register Success</string>
+    <string name="regist_failed">Register Failed</string>
+    <string name="empty_field">Field Can\'t be Empty</string>
 </resources>

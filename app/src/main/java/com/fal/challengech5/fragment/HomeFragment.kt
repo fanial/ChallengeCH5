@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
                     }
 
                     override fun onFailure(call: Call<List<ResponseDataTaskItem>>, t: Throwable) {
-                        Toast.makeText(context, "Something Wrong", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
                     }
 
                 })

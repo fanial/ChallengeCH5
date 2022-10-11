@@ -36,6 +36,10 @@ class RegistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.back.setOnClickListener {
+            findNavController().navigate(R.id.action_registFragment_to_loginFragment)
+        }
+
         binding.btnRegist.setOnClickListener {
             registUser()
         }
@@ -47,15 +51,19 @@ class RegistFragment : Fragment() {
         val password = binding.password.text.toString()
 
         if (username.length == 0 && email.length == 0 && password.length == 0){
-            Toast.makeText(context, "Silahkan isi semua field yang ada", Toast.LENGTH_SHORT).show()
+            binding.inputLayoutPass.error = getString(R.string.empty_field)
+            binding.inputLayoutUsername.error = getString(R.string.empty_field)
+            binding.inputLayoutEmail.error = getString(R.string.empty_field)
+            Toast.makeText(context, getString(R.string.empty_field), Toast.LENGTH_SHORT).show()
         }else{
             val model = ViewModelProvider(this).get(UserViewModel::class.java)
             model.postDataUser(email,"",password,username)
             model.liveUser().observe(requireActivity(), Observer {
                 if (it != null){
                     findNavController().navigate(R.id.action_registFragment_to_loginFragment)
-                    Toast.makeText(context, "Add Data Successfull", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.regist_success), Toast.LENGTH_SHORT).show()
                 }else{
+                    Toast.makeText(context, getString(R.string.regist_failed) , Toast.LENGTH_SHORT).show()
                     Log.i("REGISTER STATUS", "Register Failed")
                 }
             })

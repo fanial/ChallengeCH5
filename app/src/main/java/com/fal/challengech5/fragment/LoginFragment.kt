@@ -1,8 +1,9 @@
 package com.fal.challengech5.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
-import androidx.fragment.app.Fragment
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,8 +12,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.fal.challengech5.MainActivity
 import com.fal.challengech5.R
 import com.fal.challengech5.databinding.FragmentLoginBinding
 import com.fal.challengech5.model.ResponseDataUserItem
@@ -20,7 +23,9 @@ import com.fal.challengech5.network.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
+@Suppress("DEPRECATION")
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
@@ -33,7 +38,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
 
       _binding = FragmentLoginBinding.inflate(inflater, container, false)
@@ -45,6 +50,10 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         sharedPref = requireActivity().getSharedPreferences("account", Context.MODE_PRIVATE)
 
+        binding.btnLocalization.setOnClickListener {
+            setLang("id")
+        }
+
         binding.btnRegist.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registFragment)
         }
@@ -54,6 +63,20 @@ class LoginFragment : Fragment() {
             val password = binding.password.text.toString()
             auth(username,password)
         }
+
+    }
+
+    private fun setLang(localCode: String) {
+        var locale : Locale = Locale(localCode)
+        Locale.setDefault(locale)
+
+        var config: Configuration = Configuration()
+        config.locale = locale
+
+        val res = resources
+        res.updateConfiguration(config, res.displayMetrics)
+        val intent = Intent(activity, MainActivity::class.java)
+        requireActivity().startActivity(intent)
 
     }
 
@@ -76,22 +99,28 @@ class LoginFragment : Fragment() {
                                     addData.putString("password",resBody[i].password)
                                     addData.putString("id",resBody[i].id)
                                     addData.apply()
+                                    // Clear error text
+                                    binding.inputLayoutPass.error = null
+                                    binding.inputLayoutUsername.error = null
+
                                     Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment)
-                                    Toast.makeText(context, "Login Berhasil", Toast.LENGTH_SHORT).show()
-                                    //binding.tvAlertCantLogin.visibility = View.INVISIBLE
+                                    Toast.makeText(context, getString(R.string.login_success), Toast.LENGTH_SHORT).show()
                                 } else {
-                                    //binding.tvAlertCantLogin.visibility = View.VISIBLE
-                                  Toast.makeText(context, "Username / Password salah", Toast.LENGTH_SHORT).show()
+                                    // Set error text
+                                    binding.inputLayoutPass.error = getString(R.string.invalid_password)
+                                    binding.inputLayoutUsername.error = getString(R.string.invalid_username)
+
+                                    Toast.makeText(context, "Invalid Username or Password", Toast.LENGTH_SHORT).show()
                                 }
                             }
                         }
                     }else{
-                        Toast.makeText(context, "Failed to Load Data", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.failed_load_data), Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<List<ResponseDataUserItem>>, t: Throwable) {
-                    Toast.makeText(context, "Something Wrong", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.something_wrong), Toast.LENGTH_SHORT).show()
                 }
 
             })

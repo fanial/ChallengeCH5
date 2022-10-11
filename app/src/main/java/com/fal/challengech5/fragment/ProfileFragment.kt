@@ -65,7 +65,7 @@ class ProfileFragment : Fragment() {
             model.liveUpdateUser().observe(viewLifecycleOwner){
                 if (it != null) {
                     if (!oldPassword.equals(password)){
-                        logout()
+                        binding.inputLayoutPass.error = getString(R.string.invalid_password)
                     }
                     Toast.makeText(requireContext(), getString(R.string.update_success), Toast.LENGTH_SHORT).show()
                 }

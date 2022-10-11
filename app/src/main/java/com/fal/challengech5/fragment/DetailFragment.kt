@@ -90,7 +90,7 @@ class DetailFragment : Fragment() {
                     model.deleteLiveData().observe(viewLifecycleOwner, Observer {
                         if (it != null){
                             Log.d("deleteFilm", it.toString())
-                            Toast.makeText(context, "Delete Data Success", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, getString(R.string.delete_success), Toast.LENGTH_SHORT).show()
                         }
                     })
 
