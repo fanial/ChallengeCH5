@@ -61,7 +61,7 @@ class ProfileFragment : Fragment() {
         val email = binding.vEmail.text.toString()
         val username = binding.vUsername.text.toString()
         val password = binding.vPassword.text.toString()
-            model.putUser(id, email, username, password)
+            model.putUser(email, id, username, password)
             model.liveUpdateUser().observe(viewLifecycleOwner){
                 if (it != null) {
                     if (!oldPassword.equals(password)){

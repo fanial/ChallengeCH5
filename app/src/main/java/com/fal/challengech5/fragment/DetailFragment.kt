@@ -60,18 +60,28 @@ class DetailFragment : Fragment() {
         binding.vCategory.text = category
 
         binding.btnUpdate.setOnClickListener {
-            val data = Bundle()
+            MaterialAlertDialogBuilder(requireContext())
+                .setMessage(resources.getString(R.string.under_construc))
+                .setCancelable(false)
+                .setPositiveButton(resources.getString(R.string.delete)) { dialog, which ->
+                    dialog.cancel()
+                }
+                .show()
+
             /**
+            val data = Bundle()
+
             data.putString("idTask", idTask)
             data.putString("userId", userid)
             data.putString("category", category)
             data.putString("content", content)
             data.putString("title", title)
             data.putString("image", image)
-            **/
+
             data.putSerializable("update", getData)
             findNavController().navigate(R.id.action_detailFragment_to_updateFragment, data)
             Log.d("DATA UPDATE", "${data}")
+             **/
         }
 
         binding.btnDelete.setOnClickListener {

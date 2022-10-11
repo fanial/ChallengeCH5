@@ -52,7 +52,7 @@ class UserViewModel : ViewModel() {
             })
     }
 
-    fun putUser(id: String, username: String, email: String, password: String){
+    fun putUser(email: String, id: String, username: String, password: String){
         ApiClient.instance.putUser(id, ResponseDataUserItem(email, id, password, username))
             .enqueue(object : Callback<ResponseDataUserItem>{
                 override fun onResponse(

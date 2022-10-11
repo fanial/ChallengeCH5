@@ -25,7 +25,22 @@
                 android:layout_marginBottom="@dimen/fragment_horizontal_margin"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_below="@id/tv"
+                android:id="@+id/inputLayoutEmail"
+                android:layout_below="@+id/tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/vEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_email"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_below="@id/inputLayoutEmail"
                 android:id="@+id/inputLayoutUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -40,25 +55,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayoutEmail"
-                android:layout_below="@id/inputLayoutUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/vEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
-                    android:minHeight="48dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayoutPass"
                 app:endIconMode="password_toggle"
                 app:errorEnabled="true"
-                android:layout_below="@id/inputLayoutEmail"
+                android:layout_below="@id/inputLayoutUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

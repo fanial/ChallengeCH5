@@ -35,4 +35,5 @@
     <string name="regist_success">Berhasil Daftar</string>
     <string name="regist_failed">Gagal Daftar</string>
     <string name="empty_field">Bidang tidak boleh kosong</string>
+    <string name="under_construc">Fitur ini masih dalam pembuatan</string>
 </resources>

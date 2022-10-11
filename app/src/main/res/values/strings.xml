@@ -37,4 +37,5 @@
     <string name="regist_success">Register Success</string>
     <string name="regist_failed">Register Failed</string>
     <string name="empty_field">Field Can\'t be Empty</string>
+    <string name="under_construc">This feature is still under construction</string>
 </resources>
